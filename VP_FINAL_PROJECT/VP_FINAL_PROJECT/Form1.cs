@@ -21,12 +21,13 @@ namespace VP_FINAL_PROJECT
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog f = new OpenFileDialog();
-            if (f.ShowDialog()== System.Windows.Forms.DialogResult.OK)
+            if (f.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 file = Image.FromFile(f.FileName);
                 input_pic.Image = file;
                 string str = f.FileName;
                 path_pic.Text = str;
+                input_pic.Visible = true;
 
             }
 
@@ -40,22 +41,67 @@ namespace VP_FINAL_PROJECT
         private void enc_button_Click(object sender, EventArgs e)
         {
             Bitmap img = new Bitmap(path_pic.Text);
-            for (int i=0;i<img.Width;i++)
+            for (int i = 0; i < img.Width; i++)
             {
-                for (int j=0;j<img.Height;j++)
+                for (int j = 0; j < img.Height; j++)
                 {
                     Color pixel = img.GetPixel(i, j);
-                    if(i<1 && j<10)
+                    if (i < 1 && j < enc_key.TextLength)
                     {
-                        //Console.WriteLine("R = ["+ i +"][" + j +"] = "+ pixel.R);
-                        //Console.WriteLine("G = [" + i + "][" + j + "] = " + pixel.G);
-                        //Console.WriteLine("B = [" + i + "][" + j + "] = " + pixel.B);
-                        label1.Text = ("R = [" + i + "][" + j + "] = " + pixel.R);
 
+                        char letter = Convert.ToChar(enc_key.Text.Substring(j, 1));
+                        int value = Convert.ToInt32(letter);
+                        img.SetPixel(i, j, Color.FromArgb(pixel.R, pixel.G, value));
+
+
+
+                    }
+                    if(i==img.Width-1 && j==img.Height-1)
+                    {
+                        img.SetPixel(i, j, Color.FromArgb(pixel.R, pixel.G, enc_key.TextLength));
 
                     }
                 }
             }
+
+            SaveFileDialog savefile = new SaveFileDialog();
+            savefile.Filter = "image Files(*.png,*jpg)|*.png;*jpg";
+            savefile.InitialDirectory = @"C:\Users\asadk\Desktop";
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
+                path_pic.Text = savefile.FileName.ToString();
+                input_pic.ImageLocation = path_pic.Text;
+                img.Save(path_pic.Text);
+            }
         }
-    }s
+
+        private void decry_button_Click(object sender, EventArgs e)
+        {
+            Bitmap img = new Bitmap(path_pic.Text);
+            string return_msg = "";
+            Color lastpixel = img.GetPixel(img.Width-1,img.Height-1);
+            int msg_length = lastpixel.B;
+
+            for (int i = 0; i < img.Width; i++)
+            {
+                for (int j = 0; j < img.Height; j++)
+                {
+                    Color pixel = img.GetPixel(i, j);
+                    if (i < 1 && j <msg_length)
+                    {
+                        int value = pixel.B;
+                        char c = Convert.ToChar(value);
+
+
+                        string letter = System.Text.Encoding.ASCII.GetString(new byte[] { Convert.ToByte(c) });
+                        return_msg += letter;
+
+                    }
+                }
+            }
+            decrypt_key.Text = return_msg;
+
+         
+        }
+    }
 }

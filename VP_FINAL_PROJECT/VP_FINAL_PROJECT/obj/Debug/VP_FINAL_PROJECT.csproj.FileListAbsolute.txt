@@ -6,3 +6,4 @@ C:\Users\asadk\documents\visual studio 2013\Projects\VP_FINAL_PROJECT\VP_FINAL_P
 C:\Users\asadk\documents\visual studio 2013\Projects\VP_FINAL_PROJECT\VP_FINAL_PROJECT\obj\Debug\VP_FINAL_PROJECT.csproj.GenerateResource.Cache
 C:\Users\asadk\documents\visual studio 2013\Projects\VP_FINAL_PROJECT\VP_FINAL_PROJECT\obj\Debug\VP_FINAL_PROJECT.exe
 C:\Users\asadk\documents\visual studio 2013\Projects\VP_FINAL_PROJECT\VP_FINAL_PROJECT\obj\Debug\VP_FINAL_PROJECT.pdb
+C:\Users\asadk\documents\visual studio 2013\Projects\VP_FINAL_PROJECT\VP_FINAL_PROJECT\obj\Debug\VP_FINAL_PROJECT.csprojResolveAssemblyReference.cache

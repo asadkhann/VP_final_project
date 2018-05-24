@@ -63,6 +63,9 @@ namespace VP_FINAL_PROJECT
                     }
                 }
             }
+            probar p = new probar();
+            p.ShowDialog();
+            
 
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.Filter = "image Files(*.png,*jpg)|*.png;*jpg";
